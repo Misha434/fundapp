@@ -1,3 +1,5 @@
+const { log } = require("console");
+
 const GreeterContract = artifacts.require('Greeter');
 
 contract('Greeter', (accounts) => {
@@ -21,12 +23,13 @@ contract('Greeter', (accounts) => {
             const greeter = await GreeterContract.deployed();
             const owner = await greeter.owner();
 
-            assert.equal(owner, 0x627306090abaB3A6e1400e9345bC60c78a8BEf57)
+            assert.equal(owner, accounts[0])
         })
         it("matches the address that originally deployed the contract", async() => {
             const greeter = await GreeterContract.deployed();
             const owner = await greeter.owner();
             const expected = accounts[0];
+            console.log(expected)
 
             assert.equal(owner, expected, 'matches address used to deploy contract')
         })
