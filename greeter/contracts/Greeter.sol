@@ -2,7 +2,13 @@
 pragma solidity >= 0.7.0 < 0.9.0;
 
 contract Greeter {
-  function greet() external pure returns (string memory) {
-    return 'Hello world!';
+  string private _greeting = 'Hello world!';
+
+  function greet() external view returns (string memory) {
+    return _greeting;
+  }
+
+  function setGreeting(string calldata greeting) external {
+    _greeting = greeting;
   }
 }
