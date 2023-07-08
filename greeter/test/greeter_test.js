@@ -1,6 +1,6 @@
 const GreeterContract = artifacts.require('Greeter');
 
-contract('Greeter', () => {
+contract('Greeter', (accounts) => {
     it('has been deployed successfully.', async () => {
         const greeter = await  GreeterContract.deployed();
         assert(greeter, 'contract was not deployed.')
@@ -13,6 +13,22 @@ contract('Greeter', () => {
             const actual = await greeter.greet();
 
             assert.equal(actual, expected, "greeted with 'Hello world!'")
+        })
+    })
+
+    describe('owner()', () => {
+        it("returns the address of owner", async() => {
+            const greeter = await GreeterContract.deployed();
+            const owner = await greeter.owner();
+
+            assert.equal(owner, 0x627306090abaB3A6e1400e9345bC60c78a8BEf57)
+        })
+        it("matches the address that originally deployed the contract", async() => {
+            const greeter = await GreeterContract.deployed();
+            const owner = await greeter.owner();
+            const expected = accounts[0];
+
+            assert.equal(owner, expected, 'matches address used to deploy contract')
         })
     })
 })

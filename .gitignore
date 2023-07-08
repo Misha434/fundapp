@@ -1,1 +1,3 @@
 docker/geth/.env
+
+greeter/node_modules/**/*
